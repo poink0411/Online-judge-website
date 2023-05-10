@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/login" method="POST">
+    <p><input name="id" placeholder="아이디" required/></p>
+    <p><input name="pw" placeholder="비밀번호" required/></p>
+    <p><button type="submit">로그인</button></p>
+</form>
+</body>
+{% if error %}
+<script>alert('{{ error }}')</script>
+{% endif %}
+</html>
