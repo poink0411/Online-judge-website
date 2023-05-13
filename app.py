@@ -2,12 +2,28 @@ from flask import *
 from functions.correction import *
 from functions.login import *
 from functions.register import *
+from flask_login import *
+
 app = Flask(__name__)
+login_manager=LoginManager()
+login_manager.init_app(app)
 
 
 @app.route('/')
 def hello_world():  # put application's code here
     return 'Hello World!'
+
+@app.route('/index', methods=['POST', 'GET'])
+def index():
+    if request.method=="POST":
+        print(request.form['p_num'])
+    return render_template('index.html', problems=["1001", "1002"])
+
+@app.route('/index/<prob_num>', methods=['POST', 'GET'])
+def viewprob(prob_num):
+    prob_num = 1001
+    with open('./problems/'+str(prob_num)+'/text', 'r', encoding='utf-8') as file:
+        return render_template('viewprob.html', problem_num=prob_num, problem_text=file.read())
 
 @app.route('/test', methods=['POST', 'GET'])
 def test():

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/index" method="POST">
+    {% for p in problems %}
+    <ul><button type="submit" name="p_num" value={{ p }}/>{{ p }}</ul>
+    {% endfor %}
+</form>
+</body>
+</html>

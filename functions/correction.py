@@ -2,7 +2,6 @@ import subprocess
 import sys
 import time
 import json
-
 def check_correct(prob_number, id):
     flag = 1
     prob_number="1001"
