@@ -4,8 +4,6 @@ import time
 import json
 def check_correct(prob_number, id):
     flag = 1
-    prob_number="1001"
-    id="21053"
     with open('./problems/'+prob_number+'/test_case', 'r') as tc:
         with open('./problems/'+prob_number+'/test_case_ans', 'r') as tca:
             ans = tca.read().split('\n\n')

@@ -1,54 +1,13 @@
 from flask import *
-from functions.correction import *
-from functions.login import *
+from datetime import timedelta
 from functions.register import *
-from flask_login import *
-
+from log_in_out import *
+from mainpage import *
 app = Flask(__name__)
-login_manager=LoginManager()
-login_manager.init_app(app)
-
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
-@app.route('/index', methods=['POST', 'GET'])
-def index():
-    if request.method=="POST":
-        print(request.form['p_num'])
-    return render_template('index.html', problems=["1001", "1002"])
-
-@app.route('/index/<prob_num>', methods=['POST', 'GET'])
-def viewprob(prob_num):
-    prob_num = 1001
-    with open('./problems/'+str(prob_num)+'/text', 'r', encoding='utf-8') as file:
-        return render_template('viewprob.html', problem_num=prob_num, problem_text=file.read())
-
-@app.route('/test', methods=['POST', 'GET'])
-def test():
-    if request.method=="POST":
-        id="21053"
-        prob_number="1001"
-        with open('./data/'+id+'/ans_code_'+prob_number+'.py', 'w', encoding='utf-8') as f:
-            f.write(request.form['codes'])
-        if check_correct(0, 0):
-            return "맞았습니다!"
-        else:
-            return "틀렸습니다!"
-    return render_template('test.html')
-
-@app.route('/login', methods=['POST', 'GET'])
-def login():
-    if request.method=="POST":
-        if valid_login(request.form['id'], request.form['pw']):
-            with open('./data/user_info.json', 'r', encoding='utf-8') as file:
-                data = json.load(file)
-            return redirect(url_for('mainpage', username=data[request.form['id']]['username']))
-        else:
-            return render_template('login.html', error='아이디와 비밀번호를 다시 입력해주세요')
-    return render_template('login.html', error=None)
-
+app.secret_key="sadlfksadfljkaew"
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=2)
+app.register_blueprint(log_in_out)
+app.register_blueprint(mainpage)
 @app.route('/admin/register', methods=['POST', 'GET'])
 def register():
     if request.method=='POST':
@@ -60,13 +19,5 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/main/<username>', methods=['POST', 'GET'])
-def mainpage(username):
-    return username+" 반갑습니다!"
-
-@app.route('/main/<username>/mypage')
-def mypage(username):
-    return render_template('mypage.html')
-
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

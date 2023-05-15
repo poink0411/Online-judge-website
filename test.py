@@ -1,9 +1,8 @@
-import json
-data = {}
-with open('./data/user_info.json', 'r', encoding='utf-8') as file:
-    data = json.load(file)
+import pymysql
 
-data['21053']['problems_solved'].append(1002)
-
-with open('./data/user_info.json', 'w', encoding='utf-8') as outfile:
-    json.dump(data, outfile, indent=4)
+db=pymysql.connect(host="localhost", port=3306, db='userinfo', user="root", password='1111', charset='utf8')
+cursor=db.cursor(pymysql.cursors.DictCursor)
+cursor.execute('USE userinfo')
+cursor.execute('select * from user')
+value=cursor.fetchall()
+print(value)

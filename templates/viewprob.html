@@ -5,7 +5,7 @@
     <title>{{ problem_num }}</title>
 </head>
 <body>
-    <form action="/index/<prob_num>" method="POST">
+    <form action="{{ url_for('mainpage.viewprob', prob_num=problem_num) }}" method="POST">
         <p><textarea style="resize:none" cols="50" rows="10" readonly>{{ problem_text }}</textarea></p>
         <p><textarea style="resize:none" name="codes" cols="50" rows="10" placeholder="hello world!"></textarea></p>
         <p><input type="submit" placeholder="제출"/></p>
