@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>문제 추가</title>
+</head>
+<body>
+    <form action="/admin/register/problem" method="POST">
+        <p><textarea style="resize:none" name="prob_num" cols="20" rows="5" placeholder="문제 번호"></textarea></p>
+        <p><textarea style="resize:none" name="test_case" cols="50" rows="10" placeholder="테스트 케이스"></textarea></p>
+        <p><textarea style="resize:none" name="test_case_ans" cols="50" rows="10" placeholder="테스트 케이스 정답"></textarea></p>
+        <p><textarea style="resize:none" name="text" cols="50" rows="10" placeholder="문제 본문"></textarea></p>
+        <p><input type="submit" placeholder="제출"/></p>
+    </form>
+</body>
+</html>

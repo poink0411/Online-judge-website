@@ -24,5 +24,5 @@ def viewprob(prob_num):
             return "맞았습니다!"
         else:
             return "틀렸습니다!"
-    with open('./problems/'+str(prob_num)+'/text', 'r', encoding='utf-8') as file:
+    with open('./problems/'+str(prob_num)+'/text.txt', 'r', encoding='utf-8') as file:
         return render_template('viewprob.html', problem_num=prob_num, problem_text=file.read())
